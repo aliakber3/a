@@ -1,0 +1,102 @@
+// ==========================================
+// Exercise 1 – Multiplication Table
+// ==========================================
+function generateTable() {
+    const tableNum = parseInt(document.getElementById("ex1TableNum").value);
+    const limit = parseInt(document.getElementById("ex1Limit").value);
+    const resultDiv = document.getElementById("ex1Result");
+
+    if (isNaN(tableNum) || isNaN(limit)) {
+        resultDiv.innerText = "Please enter valid numbers.";
+        return;
+    }
+
+    let output = "";
+    for (let i = 1; i <= limit; i++) {
+        output += `${tableNum} x ${i} = ${tableNum * i}\n`;
+    }
+    resultDiv.innerText = output;
+}
+
+// ==========================================
+// Exercise 2 – Even Numbers
+// ==========================================
+function showEvenNumbers() {
+    const limit = parseInt(document.getElementById("ex2Number").value);
+    const resultDiv = document.getElementById("ex2Result");
+
+    if (isNaN(limit) || limit < 1) {
+        resultDiv.innerText = "Please enter a valid number greater than 0.";
+        return;
+    }
+
+    let evenNumbers = [];
+    for (let i = 1; i <= limit; i++) {
+        if (i % 2 === 0) {
+            evenNumbers.push(i);
+        }
+    }
+    resultDiv.innerText = evenNumbers.join(", ");
+}
+
+// ==========================================
+// Exercise 3 – Countdown
+// ==========================================
+function startCountdown() {
+    const start = parseInt(document.getElementById("ex3Start").value);
+    const resultDiv = document.getElementById("ex3Result");
+
+    if (isNaN(start) || start < 1) {
+        resultDiv.innerText = "Please enter a positive number starting from 1.";
+        return;
+    }
+
+    let countdownList = [];
+    for (let i = start; i >= 1; i--) {
+        countdownList.push(i);
+    }
+    resultDiv.innerText = countdownList.join("... ") + " 🚀";
+}
+
+// ==========================================
+// Exercise 4 – Sum of Numbers
+// ==========================================
+function calculateSum() {
+    const limit = parseInt(document.getElementById("ex4Limit").value);
+    const resultDiv = document.getElementById("ex4Result");
+
+    if (isNaN(limit) || limit < 1) {
+        resultDiv.innerText = "Please enter a positive number.";
+        return;
+    }
+
+    let sum = 0;
+    for (let i = 1; i <= limit; i++) {
+        sum += i;
+    }
+    resultDiv.innerText = `The sum of numbers from 1 to ${limit} is: ${sum}`;
+}
+
+// ==========================================
+// Exercise 5 – Number Pattern
+// ==========================================
+function generatePattern() {
+    const rows = parseInt(document.getElementById("ex5Rows").value);
+    const resultDiv = document.getElementById("ex5Result");
+
+    if (isNaN(rows) || rows < 1) {
+        resultDiv.innerText = "Please enter a valid number.";
+        return;
+    }
+
+    let pattern = "";
+    // Outer loop controls the number of lines (rows)
+    for (let i = 1; i <= rows; i++) {
+        // Inner loop builds the string for each line
+        for (let j = 1; j <= i; j++) {
+            pattern += j;
+        }
+        pattern += "\n"; // Moves to the next line after finishing the inner loop row
+    }
+    resultDiv.innerText = pattern;
+}
