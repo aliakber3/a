@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7fafc;
+            color: #2d3748;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #2b6cb0;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #edf2f7;
+            padding-bottom: 10px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #4299e1;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #3182ce;
+        }
+        /* Shopping List Display */
+        .shopping-list {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 150px;
+            margin-bottom: 20px;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background-color: #ffffff;
+            border: 1px solid #edf2f7;
+            border-radius: 4px;
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .list-item::before {
+            content: "🛒";
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        .total-counter {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #4a5568;
+            padding-top: 15px;
+            border-top: 2px dashed #e2e8f0;
+        }
+        .total-highlight {
+            color: #2b6cb0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>My Shopping List</h2>
+    
+    <!-- Input field and Add button -->
+    <div class="input-group">
+        <input type="text" id="itemInput" placeholder="Enter item name..." autofocus>
+        <button id="addBtn" onclick="addNewItem()">Add Item</button>
+    </div>
+    
+    <!-- Div container where items are displayed using a loop -->
+    <div class="shopping-list" id="listContainer"></div>
+    
+    <!-- Total items counter at the bottom -->
+    <div class="total-counter">
+        Total Items: <span id="totalCount" class="total-highlight">0</span>
+    </div>
+</div>
+
+<script>
+    // Initialize the shopping list array with default items
+    const shoppingList = ["Milk", "Bread", "Eggs", "Rice", "Sugar"];
+
+    // Function to render/refresh the list on the screen
+    function displayList() {
+        const listContainer = document.getElementById("listContainer");
+        const totalCountSpan = document.getElementById("totalCount");
+        
+        // Clear previous entries inside the list container div
+        listContainer.innerHTML = "";
+        
+        // Loop through the array to generate list items dynamically
+        for (let i = 0; i < shoppingList.length; i++) {
+            // Create a div element for each item
+            const itemElement = document.createElement("div");
+            itemElement.className = "list-item";
+            itemElement.textContent = shoppingList[i];
+            
+            // Append the item element to the container
+            listContainer.appendChild(itemElement);
+        }
+        
+        // Update total items count using array.length
+        totalCountSpan.textContent = shoppingList.length;
+    }
+
+    // Function to add a new item when the button is clicked
+    function addNewItem() {
+        const itemInput = document.getElementById("itemInput");
+        const newItemValue = itemInput.value.trim();
+        
+        // Check if the input is empty
+        if (newItemValue === "") {
+            alert("Please type an item name before adding.");
+            return;
+        }
+        
+        // Add new item to the array using push()
+        shoppingList.push(newItemValue);
+        
+        // Refresh the list to display updated array elements
+        displayList();
+        
+        // Clear the input field
+        itemInput.value = "";
+        
+        // Bring focus back to the input field for ease of typing
+        itemInput.focus();
+    }
+
+    // Allow user to add items by pressing 'Enter' on their keyboard
+    document.getElementById("itemInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            addNewItem();
+        }
+    });
+
+    // Run displayList on initial page load to show default items
+    displayList();
+</script>
+
+</body>
+</html>
