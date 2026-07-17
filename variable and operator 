@@ -1,0 +1,60 @@
+// Exercise 1: Print sum of num1 and num2
+let num1 = 10;
+let num2 = 20;
+console.log(num1 + num2); // Output: 30
+
+// Exercise 2: Print difference of a and b
+let a = 50;
+let b = 15;
+console.log(a - b); // Output: 35
+
+// Exercise 3: Print product of x and y
+let x = 12;
+let y = 5;
+console.log(x * y); // Output: 60
+
+// Exercise 4: Print the division result
+let total = 100;
+let parts = 4;
+console.log(total / parts); // Output: 25
+
+// Exercise 5: Calculate and print total marks
+let math = 80;
+let english = 70;
+let science = 90;
+let totalMarks = math + english + science;
+console.log(totalMarks); // Output: 240
+
+// Exercise 6: Calculate and print average marks using variables from Exercise 5
+let averageMarks = totalMarks / 3;
+console.log(averageMarks); // Output: 80
+
+// Exercise 7: Calculate and print the area of a rectangle
+let length = 10;
+let width = 5;
+console.log(length * width); // Output: 50
+
+// Exercise 8: Calculate and print the age after 5 years
+let currentAge = 20;
+console.log(currentAge + 5); // Output: 25
+
+// Exercise 9: Calculate and print pocket money for 4 weeks
+let weeklyPocketMoney = 500;
+console.log(weeklyPocketMoney * 4); // Output: 2000
+
+// Exercise 10: Calculate and print total shopping bill
+let penPrice = 30;
+let notebookPrice = 120;
+let eraserPrice = 20;
+console.log(penPrice + notebookPrice + eraserPrice); // Output: 170
+
+// Exercise 11: Calculate and print total salary
+let basicSalary = 30000;
+let bonus = 5000;
+console.log(basicSalary + bonus); // Output: 35000
+
+// Exercise 12: Calculate and print total cricket score
+let match1 = 45;
+let match2 = 60;
+let match3 = 80;
+console.log(match1 + match2 + match3); // Output: 185
