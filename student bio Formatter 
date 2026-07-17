@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Bio Formatter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #357abd;
+        }
+        .btn-secondary {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #27ae60;
+        }
+        .output-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .output-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #4a90e2;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .output-box p {
+            margin: 8px 0;
+        }
+        .output-box strong {
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Bio Formatter</h2>
+    
+    <!-- Input Fields -->
+    <div class="form-group">
+        <label for="fullName">Student Full Name</label>
+        <input type="text" id="fullName" placeholder="e.g.   Muhammad Bilal Raza   " value="  Muhammad Bilal Raza  ">
+    </div>
+    
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="e.g. KARACHI" value="KARACHI">
+    </div>
+    
+    <div class="form-group">
+        <label for="intro">Short Introduction</label>
+        <textarea id="intro" placeholder="e.g. I am a student. Every student should practice JavaScript.">I am a student. Every student should practice JavaScript.</textarea>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="btn-container">
+        <button class="btn-primary" onclick="formatInformation()">Format Information</button>
+        <button class="btn-secondary" onclick="checkName()">Check Name</button>
+    </div>
+    
+    <!-- Output Area -->
+    <div class="output-section">
+        <h3>Output Results</h3>
+        <div class="output-box" id="output">
+            <p style="color: #a0aec0; text-align: center;">Click a button to generate formatting outputs.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function formatInformation() {
+        // Retrieve values directly from inputs
+        const fullNameInput = document.getElementById('fullName').value;
+        const cityInput = document.getElementById('city').value;
+        const introInput = document.getElementById('intro').value;
+
+        // 1. Remove extra spaces from the student's name using trim()
+        const cleanName = fullNameInput.trim();
+
+        // 2. Display the total number of characters in the name using length
+        const nameLength = cleanName.length;
+
+        // 3. Display the first name only using slice()
+        // Find the index of the first space to isolate the first name
+        const firstSpaceIndex = cleanName.indexOf(" ");
+        const firstName = firstSpaceIndex !== -1 ? cleanName.slice(0, firstSpaceIndex) : cleanName;
+
+        // 4. Convert the full name to UPPERCASE
+        const uppercaseName = cleanName.toUpperCase();
+
+        // 5. Convert the city to lowercase
+        const lowercaseCity = cityInput.toLowerCase();
+
+        // 6. Replace every occurrence of "student" with "developer" using replaceAll()
+        const updatedIntro = introInput.replaceAll("student", "developer");
+
+        // 7. Show the first 20 characters of the introduction using substring()
+        const first20Chars = updatedIntro.substring(0, 20);
+
+        // Render HTML output to the DOM
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = `
+            <p><strong>Clean Name:</strong> ${cleanName}</p>
+            <p><strong>Name Length:</strong> ${nameLength}</p>
+            <p><strong>First Name:</strong> ${firstName}</p>
+            <p><strong>Uppercase Name:</strong> ${uppercaseName}</p>
+            <p><strong>City:</strong> ${lowercaseCity}</p>
+            <p><strong>Updated Introduction:</strong> ${updatedIntro}</p>
+            <p><strong>First 20 Characters:</strong> ${first20Chars}</p>
+        `;
+    }
+
+    // Bonus Challenge function
+    function checkName() {
+        const fullNameInput = document.getElementById('fullName').value;
+        const outputDiv = document.getElementById('output');
+        
+        // Use indexOf() to check if "ALI" exists in the entered name
+        // indexOf returns -1 if the substring is not found
+        if (fullNameInput.indexOf("ALI") !== -1) {
+            outputDiv.innerHTML = `<p style="color: #27ae60; font-weight: bold;">ALI is present in the name.</p>`;
+        } else {
+            outputDiv.innerHTML = `<p style="color: #e74c3c; font-weight: bold;">ALI is not present.</p>`;
+        }
+    }
+</script>
+
+</body>
+</html>
