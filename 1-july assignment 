@@ -1,8 +1,0 @@
-
-
-Assignment to be done
-Exercise 1 – Multiplication Table: Create two input fields (Table Number and Number of Times) and a button. When the button is clicked, display the multiplication table inside the page using a for loop.
-Exercise 2 – Even Numbers: Create one input field where the user enters a number and a button. When clicked, display all even numbers from 1 up to the entered number using a loop.
-Exercise 3 – Countdown: Create one input field and a button. When the button is clicked, display a countdown from the entered number to 1 inside the page using a for loop.
-Exercise 4 – Sum of Numbers: Create one input field and a button. When the button is clicked, calculate and display the sum of all numbers from 1 to the entered number using a loop. Show the final answer on the page.
-Exercise 5 – Number Pattern: Create one input field and a button. When the button is clicked, display the following pattern according to the entered number using nested for loops. Example: If the input is 5, the output should be: 1, 12, 123, 1234, 12345 (each on a new line).
