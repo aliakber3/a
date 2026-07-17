@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions Practice Exercises</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        .exercise-card {
+            background-color: #f7fafc;
+            border-left: 5px solid #4299e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            text-align: center;
+        }
+        .exercise-card:nth-of-type(2) {
+            border-left-color: #48bb78;
+        }
+        .exercise-card:nth-of-type(3) {
+            border-left-color: #ecc94b;
+        }
+        .exercise-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .display-heading {
+            font-size: 2rem;
+            color: #2d3748;
+            margin: 15px 0;
+            font-weight: 700;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        /* Exercise 1 Buttons */
+        .btn-add-marks { background-color: #4299e1; }
+        .btn-add-marks:hover { background-color: #3182ce; }
+        .btn-deduct-marks { background-color: #e53e3e; }
+        .btn-deduct-marks:hover { background-color: #c53030; }
+        
+        /* Exercise 2 Buttons */
+        .btn-birthday { background-color: #48bb78; }
+        .btn-birthday:hover { background-color: #38a169; }
+        .btn-age-back { background-color: #718096; }
+        .btn-age-back:hover { background-color: #4a5568; }
+
+        /* Exercise 3 Buttons */
+        .btn-bulb-on { background-color: #ecc94b; color: #1a202c; }
+        .btn-bulb-on:hover { background-color: #dd6b20; color: white; }
+        .btn-bulb-off { background-color: #4a5568; }
+        .btn-bulb-off:hover { background-color: #2d3748; }
+
+        /* Custom Bulb Graphic Styling for fun */
+        .bulb-indicator {
+            font-size: 3rem;
+            margin-bottom: -10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Functions Practice</h1>
+
+    <!-- EXERCISE 1 — STUDENT MARKS COUNTER -->
+    <div class="exercise-card">
+        <div class="exercise-title">Exercise 1 — Student Marks Counter</div>
+        <h2 class="display-heading" id="marksHeading">Marks: 50</h2>
+        <div class="btn-group">
+            <button class="btn-add-marks" id="addMarksBtn">Add Bonus Marks</button>
+            <button class="btn-deduct-marks" id="deductMarksBtn">Deduct Marks</button>
+        </div>
+    </div>
+
+    <!-- EXERCISE 2 — AGE COUNTER -->
+    <div class="exercise-card">
+        <div class="exercise-title" style="color: #2f855a;">Exercise 2 — Age Counter</div>
+        <h2 class="display-heading" id="ageHeading">Age: 18</h2>
+        <div class="btn-group">
+            <button class="btn-birthday" id="birthdayBtn">Birthday</button>
+            <button class="btn-age-back" id="ageBackBtn">Go Back One Year</button>
+        </div>
+    </div>
+
+    <!-- EXERCISE 3 — LIGHT BULB STATUS -->
+    <div class="exercise-card">
+        <div class="exercise-title" style="color: #b7791f;">Exercise 3 — Light Bulb Status</div>
+        <div class="bulb-indicator" id="bulbEmoji">💡</div>
+        <h2 class="display-heading" id="bulbHeading">Bulb is OFF</h2>
+        <div class="btn-group">
+            <button class="btn-bulb-on" id="bulbOnBtn">Turn ON</button>
+            <button class="btn-bulb-off" id="bulbOffBtn">Turn OFF</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // EXERCISE 1 — STUDENT MARKS COUNTER
+    // ==========================================
+    let studentMarks = 50;
+
+    // Use querySelector to select DOM elements
+    const marksHeading = document.querySelector("#marksHeading");
+    const addMarksBtn = document.querySelector("#addMarksBtn");
+    const deductMarksBtn = document.querySelector("#deductMarksBtn");
+
+    // Separate functions for each operation
+    function addBonusMarks() {
+        studentMarks += 5;
+        marksHeading.innerHTML = "Marks: " + studentMarks;
+    }
+
+    function deductMarks() {
+        studentMarks -= 5;
+        marksHeading.innerHTML = "Marks: " + studentMarks;
+    }
+
+    // Attach events using addEventListener
+    addMarksBtn.addEventListener("click", addBonusMarks);
+    deductMarksBtn.addEventListener("click", deductMarks);
+
+
+    // ==========================================
+    // EXERCISE 2 — AGE COUNTER
+    // ==========================================
+    let currentAge = 18;
+
+    const ageHeading = document.querySelector("#ageHeading");
+    const birthdayBtn = document.querySelector("#birthdayBtn");
+    const ageBackBtn = document.querySelector("#ageBackBtn");
+
+    // Specific functions named exactly as requested
+    function incrementAge() {
+        currentAge += 1;
+        ageHeading.innerHTML = "Age: " + currentAge; // Update using innerHTML
+    }
+
+    function decrementAge() {
+        currentAge -= 1;
+        ageHeading.innerHTML = "Age: " + currentAge; // Update using innerHTML
+    }
+
+    // Attach events using addEventListener
+    birthdayBtn.addEventListener("click", incrementAge);
+    ageBackBtn.addEventListener("click", decrementAge);
+
+
+    // ==========================================
+    // EXERCISE 3 — LIGHT BULB STATUS
+    // ==========================================
+    const bulbHeading = document.querySelector("#bulbHeading"); // Selected heading via querySelector
+    const bulbEmoji = document.querySelector("#bulbEmoji");
+    const bulbOnBtn = document.querySelector("#bulbOnBtn");
+    const bulbOffBtn = document.querySelector("#bulbOffBtn");
+
+    // Required functions turnOn() and turnOff()
+    function turnOn() {
+        bulbHeading.innerHTML = "Bulb is ON";
+        bulbEmoji.textContent = "💡"; // Change bulb to glowing
+        bulbEmoji.style.filter = "drop-shadow(0 0 12px #ecc94b)";
+    }
+
+    function turnOff() {
+        bulbHeading.innerHTML = "Bulb is OFF";
+        bulbEmoji.textContent = "🔌"; // Change bulb to unlit/plugged out
+        bulbEmoji.style.filter = "none";
+    }
+
+    // Connect the buttons using addEventListener()
+    bulbOnBtn.addEventListener("click", turnOn);
+    bulbOffBtn.addEventListener("click", turnOff);
+
+    // Run initial bulb style setting
+    turnOff();
+</script>
+
+</body>
+</html>
