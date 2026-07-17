@@ -1,0 +1,18 @@
+// Creating a Car Object
+const myCar = {
+    brand: "Toyota",
+    model: "Supra",
+    year: 2024,
+    color: "Renaissance Red",
+    isElectric: false,
+    
+    // An object method (an action the car can do)
+    startEngine: function() {
+        return `The ${this.brand} ${this.model}'s engine roars to life! 🏎️💨`;
+    }
+};
+
+// Accessing properties (Using Dot Notation)
+console.log(myCar.brand);       // Output: Toyota
+console.log(myCar.year);        // Output: 2024
+console.log(myCar.startEngine()); // Output: The Toyota Supra's engine roars to life! 🏎️💨
