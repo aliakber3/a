@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Event Countdown</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        h2 {
+            color: #1a365d;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+        input[type="datetime-local"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="datetime-local"]:focus {
+            border-color: #4299e1;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #3182ce;
+        }
+        .results-box {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #e2e8f0;
+            text-align: left;
+        }
+        .time-unit {
+            display: flex;
+            justify-content: space-between;
+            background: #f7fafc;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 4px solid #4299e1;
+            font-weight: 500;
+        }
+        .time-value {
+            font-weight: bold;
+            color: #2b6cb0;
+        }
+        .error-msg {
+            color: #e53e3e;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Event Countdown ⏳</h2>
+    
+    <!-- Date Input (Allows picking date and time) -->
+    <div class="form-group">
+        <label for="eventDate">Select Upcoming Event Date & Time:</label>
+        <input type="datetime-local" id="eventDate">
+    </div>
+    
+    <!-- Action Button -->
+    <button onclick="calculateRemainingTime()">Remaining Time</button>
+    
+    <!-- Output Display -->
+    <div class="results-box" id="outputArea">
+        <p style="text-align: center; color: #a0aec0;">Select a date and click "Remaining Time"</p>
+    </div>
+</div>
+
+<script>
+    function calculateRemainingTime() {
+        const eventInput = document.getElementById('eventDate').value;
+        const outputArea = document.getElementById('outputArea');
+
+        // Check if user entered a date
+        if (!eventInput) {
+            outputArea.innerHTML = `<p class="error-msg">Please select a date first!</p>`;
+            return;
+        }
+
+        const targetDate = new Date(eventInput).getTime();
+        const now = new Date().getTime();
+
+        // Calculate total difference in milliseconds
+        const difference = targetDate - now;
+
+        // If the date is in the past
+        if (difference <= 0) {
+            outputArea.innerHTML = `<p class="error-msg">The event date must be in the future!</p>`;
+            return;
+        }
+
+        // Time conversion math
+        const msInSecond = 1000;
+        const msInMinute = msInSecond * 60;
+        const msInHour = msInMinute * 60;
+        const msInDay = msInHour * 24;
+
+        // Extract countdown segments
+        const days = Math.floor(difference / msInDay);
+        const hours = Math.floor((difference % msInDay) / msInHour);
+        const minutes = Math.floor((difference % msInHour) / msInMinute);
+        const seconds = Math.floor((difference % msInMinute) / msInSecond);
+
+        // Display results to the page
+        outputArea.innerHTML = `
+            <div class="time-unit">
+                <span>Remaining Days:</span>
+                <span class="time-value">${days}</span>
+            </div>
+            <div class="time-unit">
+                <span>Remaining Hours:</span>
+                <span class="time-value">${hours}</span>
+            </div>
+            <div class="time-unit">
+                <span>Remaining Minutes:</span>
+                <span class="time-value">${minutes}</span>
+            </div>
+            <div class="time-unit">
+                <span>Remaining Seconds:</span>
+                <span class="time-value">${seconds}</span>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>
