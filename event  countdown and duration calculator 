@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Countdown & Duration Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            max-width: 500px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #2196F3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Event Countdown & Duration Calculator</h2>
+
+    <!-- Inputs as required -->
+    <div class="input-group">
+        <label for="todayDate">Today's Date:</label>
+        <input type="date" id="todayDate">
+    </div>
+
+    <div class="input-group">
+        <label for="eventDate">Event Date:</label>
+        <input type="date" id="eventDate">
+    </div>
+
+    <!-- Button as required -->
+    <button id="calculateBtn">Calculate Remaining Time</button>
+
+    <!-- Div to display result -->
+    <div id="result" style="display: none;"></div>
+
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            const todayInput = document.getElementById('todayDate').value;
+            const eventInput = document.getElementById('eventDate').value;
+
+            if (!todayInput || !eventInput) {
+                alert("Please select both dates.");
+                return;
+            }
+
+            // 1. Convert both input values into Date objects
+            const todayDate = new Date(todayInput);
+            const eventDate = new Date(eventInput);
+
+            // 2. Use getTime() to get the time in milliseconds
+            const todayMs = todayDate.getTime();
+            const eventMs = eventDate.getTime();
+
+            // 3. Find the difference between the two dates (remaining time)
+            const diffMs = eventMs - todayMs;
+
+            if (diffMs < 0) {
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('result').innerHTML = "<strong>The event date has already passed!</strong>";
+                return;
+            }
+
+            // 4. Calculate conversions
+            const diffSeconds = diffMs / 1000;
+            const diffMinutes = diffSeconds / 60;
+            const diffHours = diffMinutes / 60;
+            const diffDays = diffHours / 24;
+            
+            // Approximations (30.44 days per month, 365.25 days per year)
+            const diffMonths = diffDays / 30.44;
+            const diffYears = diffDays / 365.25;
+
+            // Display the remaining time
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h3>Time Remaining:</h3>
+                <ul>
+                    <li><strong>Milliseconds:</strong> ${diffMs.toLocaleString()} ms</li>
+                    <li><strong>Seconds:</strong> ${diffSeconds.toFixed(2)} seconds</li>
+                    <li><strong>Minutes:</strong> ${diffMinutes.toFixed(2)} minutes</li>
+                    <li><strong>Hours:</strong> ${diffHours.toFixed(2)} hours</li>
+                    <li><strong>Days:</strong> ${diffDays.toFixed(2)} days</li>
+                    <li><strong>Months (Approx.):</strong> ${diffMonths.toFixed(2)} months</li>
+                    <li><strong>Years (Approx.):</strong> ${diffYears.toFixed(2)} years</li>
+                </ul>
+            `;
+        });
+    </script>
+
+</body>
+</html>
