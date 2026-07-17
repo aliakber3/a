@@ -1,0 +1,320 @@
+// =========================================================================
+// MIXED CHALLENGE 1 — STUDENT RESULT & ELIGIBILITY
+// =========================================================================
+console.log("--- Challenge 1: Student Result & Eligibility ---");
+let obtainedMarks = 72;
+let passingMarks = 40;
+let attendance = 85;
+let requiredAttendance = 75;
+
+// 1. Check if the student has passed.
+if (obtainedMarks >= passingMarks) {
+    console.log("1. Student status: Passed");
+} else {
+    console.log("1. Student status: Failed");
+}
+
+// 2. Check if attendance meets the requirement.
+if (attendance >= requiredAttendance) {
+    console.log("2. Attendance status: Meets requirement");
+} else {
+    console.log("2. Attendance status: Shortage");
+}
+
+// 3. Check if the student can sit in the final exam (must pass AND have required attendance).
+if (obtainedMarks >= passingMarks && attendance >= requiredAttendance) {
+    console.log("3. Exam Eligibility: Allowed to sit for final exams");
+} else {
+    console.log("3. Exam Eligibility: Not allowed to sit for final exams");
+}
+
+// 4. Check if the student qualifies for a scholarship (marks greater than 70 OR attendance greater than 90).
+if (obtainedMarks > 70 || attendance > 90) {
+    console.log("4. Scholarship: Qualified!");
+} else {
+    console.log("4. Scholarship: Not Qualified");
+}
+
+// 5. Compare attendance and requiredAttendance using >=.
+console.log("5. Is attendance >= required attendance?", attendance >= requiredAttendance);
+
+// 6. Check if obtainedMarks is strictly equal to passingMarks.
+console.log("6. Are obtained marks strictly equal to passing marks?", obtainedMarks === passingMarks);
+
+
+// =========================================================================
+// MIXED CHALLENGE 2 — ONLINE SHOPPING WEBSITE
+// =========================================================================
+console.log("\n--- Challenge 2: Online Shopping Website ---");
+let cartTotal = 5500;
+let minimumOrder = 3000;
+let walletBalance = 4000;
+let premiumMember = true;
+
+// 1. Check if the cart total meets the minimum order requirement.
+if (cartTotal >= minimumOrder) {
+    console.log("1. Minimum order status: Requirement met");
+} else {
+    console.log("1. Minimum order status: Minimum order required");
+}
+
+// 2. Check if the user has enough balance.
+if (walletBalance >= cartTotal) {
+    console.log("2. Balance check: Sufficient balance available");
+} else {
+    console.log("2. Balance check: Insufficient balance");
+}
+
+// 3. Check if the order can be placed (minimum order reached AND enough balance).
+if (cartTotal >= minimumOrder && walletBalance >= cartTotal) {
+    console.log("3. Order Status: Order successfully placed");
+} else {
+    console.log("3. Order Status: Cannot place order");
+}
+
+// 4. Check if the user gets free delivery (premium member OR cart total greater than 5000).
+if (premiumMember || cartTotal > 5000) {
+    console.log("4. Delivery Fee: Free delivery applied");
+} else {
+    console.log("4. Delivery Fee: Standard delivery charges apply");
+}
+
+// 5. Compare walletBalance and cartTotal.
+if (walletBalance > cartTotal) {
+    console.log("5. Wallet vs Cart: Wallet balance is higher than cart total");
+} else if (walletBalance < cartTotal) {
+    console.log("5. Wallet vs Cart: Wallet balance is less than cart total");
+} else {
+    console.log("5. Wallet vs Cart: Wallet balance equals cart total");
+}
+
+// 6. Check if premiumMember is strictly equal to true.
+console.log("6. Is user strictly a premium member?", premiumMember === true);
+
+
+// =========================================================================
+// MIXED CHALLENGE 3 — GAMING PLATFORM
+// =========================================================================
+console.log("\n--- Challenge 3: Gaming Platform ---");
+let playerLevel = 18;
+let requiredLevel = 15;
+let coins = 1800;
+let requiredCoins = 2000;
+let premiumPass = true;
+
+// 1. Check if the player's level meets the requirement.
+if (playerLevel >= requiredLevel) {
+    console.log("1. Level Check: Requirement met");
+} else {
+    console.log("1. Level Check: Higher level required");
+}
+
+// 2. Check if the player has enough coins.
+if (coins >= requiredCoins) {
+    console.log("2. Coin Check: Sufficient coins");
+} else {
+    console.log("2. Coin Check: Insufficient coins");
+}
+
+// 3. Check if the player can unlock a special mission (required level AND required coins).
+if (playerLevel >= requiredLevel && coins >= requiredCoins) {
+    console.log("3. Special Mission: Unlocked!");
+} else {
+    console.log("3. Special Mission: Locked (Level or coins requirement missing)");
+}
+
+// 4. Check if the player can access VIP content (premium pass OR level greater than 20).
+if (premiumPass || playerLevel > 20) {
+    console.log("4. VIP Content: Access granted");
+} else {
+    console.log("4. VIP Content: Access denied");
+}
+
+// 5. Compare requiredCoins and coins.
+console.log("5. Is requiredCoins > coins?", requiredCoins > coins);
+
+// 6. Check if premiumPass is not equal to false.
+console.log("6. Is premium pass active (not equal to false)?", premiumPass !== false);
+
+
+// =========================================================================
+// MIXED CHALLENGE 4 — BANK ACCOUNT VERIFICATION
+// =========================================================================
+console.log("\n--- Challenge 4: Bank Account Verification ---");
+let accountBalance = 50000;
+let withdrawalAmount = 15000;
+let pinVerified = true;
+let dailyLimit = 20000;
+
+// 1. Check if the withdrawal amount is within the daily limit.
+if (withdrawalAmount <= dailyLimit) {
+    console.log("1. Daily Limit Check: Within safe limit");
+} else {
+    console.log("1. Daily Limit Check: Exceeds daily limit");
+}
+
+// 2. Check if the account has enough balance.
+if (accountBalance >= withdrawalAmount) {
+    console.log("2. Account Balance Check: Sufficient funds");
+} else {
+    console.log("2. Account Balance Check: Insufficient funds");
+}
+
+// 3. Check if the withdrawal should be approved (PIN verified AND sufficient balance).
+if (pinVerified && accountBalance >= withdrawalAmount) {
+    console.log("3. Withdrawal Authorization: Approved");
+} else {
+    console.log("3. Withdrawal Authorization: Declined (Check PIN/Balance)");
+}
+
+// 4. Check if the user can make a special withdrawal (balance greater than 100000 OR PIN verified).
+if (accountBalance > 100000 || pinVerified) {
+    console.log("4. Special Withdrawal Eligibility: Eligible");
+} else {
+    console.log("4. Special Withdrawal Eligibility: Not Eligible");
+}
+
+// 5. Compare withdrawalAmount and dailyLimit.
+if (withdrawalAmount < dailyLimit) {
+    console.log("5. Limit comparison: Withdrawal is strictly below daily limit");
+} else if (withdrawalAmount === dailyLimit) {
+    console.log("5. Limit comparison: Withdrawal exactly matches daily limit");
+} else {
+    console.log("5. Limit comparison: Withdrawal is above daily limit");
+}
+
+// 6. Check if pinVerified is strictly equal to true.
+console.log("6. Is PIN strictly verified?", pinVerified === true);
+
+
+// =========================================================================
+// MIXED CHALLENGE 5 — EVENT REGISTRATION SYSTEM
+// =========================================================================
+console.log("\n--- Challenge 5: Event Registration System ---");
+let age = 19;
+let minimumAge = 18;
+let registeredParticipants = 480;
+let maximumParticipants = 500;
+let vipInvite = false;
+
+// 1. Check if the user meets the age requirement.
+if (age >= minimumAge) {
+    console.log("1. Age Gate: Approved");
+} else {
+    console.log("1. Age Gate: Underage");
+}
+
+// 2. Check if seats are still available.
+if (registeredParticipants < maximumParticipants) {
+    console.log("2. Seat Capacity: Seats are available");
+} else {
+    console.log("2. Seat Capacity: Event is full");
+}
+
+// 3. Check if the user can register (age requirement met AND seats available).
+if (age >= minimumAge && registeredParticipants < maximumParticipants) {
+    console.log("3. Registration Status: Success");
+} else {
+    console.log("3. Registration Status: Rejected");
+}
+
+// 4. Check if the user can enter the VIP area (VIP invite OR age greater than 25).
+if (vipInvite || age > 25) {
+    console.log("4. VIP Room Access: Allowed");
+} else {
+    console.log("4. VIP Room Access: Disallowed");
+}
+
+// 5. Compare registeredParticipants and maximumParticipants.
+console.log(`5. Capacity numbers: ${registeredParticipants} / ${maximumParticipants}`);
+
+// 6. Check if vipInvite is strictly not equal to true.
+console.log("6. Is user missing a VIP invite?", vipInvite !== true);
+
+
+// =========================================================================
+// MIXED CHALLENGE 6 — JOB APPLICATION PORTAL
+// =========================================================================
+console.log("\n--- Challenge 6: Job Application Portal ---");
+let experience = 3;
+let requiredExperience = 2;
+let degreeCompleted = true;
+let referralAvailable = false;
+
+// 1. Check if the applicant has enough experience.
+if (experience >= requiredExperience) {
+    console.log("1. Experience Check: Requirements met");
+} else {
+    console.log("1. Experience Check: Lacks required years");
+}
+
+// 2. Check if the degree is completed.
+if (degreeCompleted) {
+    console.log("2. Education Status: Degree completed");
+} else {
+    console.log("2. Education Status: Incomplete qualification");
+}
+
+// 3. Check if the applicant is eligible for the interview (required experience AND degree completed).
+if (experience >= requiredExperience && degreeCompleted) {
+    console.log("3. Interview Stage: Eligible for interview screening");
+} else {
+    console.log("3. Interview Stage: Ineligible");
+}
+
+// 4. Check if the applicant gets priority consideration (degree completed OR referral available).
+if (degreeCompleted || referralAvailable) {
+    console.log("4. Application Tier: Priority processing applied");
+} else {
+    console.log("4. Application Tier: Standard processing");
+}
+
+// 5. Compare experience and requiredExperience.
+console.log("5. Years above required quota:", experience - requiredExperience);
+
+// 6. Check if referralAvailable is equal to true.
+console.log("6. Is referral verified?", referralAvailable == true);
+
+
+// =========================================================================
+// MIXED CHALLENGE 7 — UNIVERSITY ADMISSION
+// =========================================================================
+console.log("\n--- Challenge 7: University Admission ---");
+let testScore = 82;
+let requiredScore = 75;
+let documentsSubmitted = true;
+let sportsQuota = false;
+
+// 1. Check if the test score meets the requirement.
+if (testScore >= requiredScore) {
+    console.log("1. Test Score Check: Cut-off cleared");
+} else {
+    console.log("1. Test Score Check: Below cut-off score");
+}
+
+// 2. Check if all documents are submitted.
+if (documentsSubmitted) {
+    console.log("2. Documentation: Complete");
+} else {
+    console.log("2. Documentation: Incomplete files");
+}
+
+// 3. Check if admission can be granted (required score AND documents submitted).
+if (testScore >= requiredScore && documentsSubmitted) {
+    console.log("3. Admission Status: Admission Granted");
+} else {
+    console.log("3. Admission Status: Admission Pending / Declined");
+}
+
+// 4. Check if the student has an alternative admission path (sports quota OR score greater than 90).
+if (sportsQuota || testScore > 90) {
+    console.log("4. Alternative Pathway: Eligible");
+} else {
+    console.log("4. Alternative Pathway: Not Eligible");
+}
+
+// 5. Compare testScore and requiredScore.
+console.log(`5. Score: ${testScore} vs Requirement: ${requiredScore}`);
+
+// 6. Check if sportsQuota is strictly equal to false.
+console.log("6. Is the student non-athlete quota?", sportsQuota === false);
