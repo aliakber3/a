@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loop and Function Exercises</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        .exercise-card {
+            background-color: #f7fafc;
+            border-left: 5px solid #4299e1;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .exercise-title {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-bottom: 15px;
+        }
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 140px;
+        }
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            border: 2px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="number"]:focus {
+            border-color: #4299e1;
+        }
+        button {
+            padding: 10px 18px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: auto;
+            height: 42px;
+        }
+        button:hover {
+            background-color: #3182ce;
+        }
+        .output-box {
+            background-color: #edf2f7;
+            border-radius: 6px;
+            padding: 12px 18px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: #1a202c;
+            line-height: 1.5;
+            min-height: 24px;
+            white-space: pre-line; /* Keeps line breaks and spaces */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Loops & Functions Practice</h1>
+
+    <!-- EXERCISE 1: MULTIPLICATION TABLE -->
+    <div class="exercise-card">
+        <div class="exercise-title">Exercise 1 – Multiplication Table</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="tableNum">Table Number</label>
+                <input type="number" id="tableNum" placeholder="e.g. 5" value="5">
+            </div>
+            <div class="form-group">
+                <label for="tableLimit">Number of Times</label>
+                <input type="number" id="tableLimit" placeholder="e.g. 10" value="10">
+            </div>
+            <button onclick="generateTable()">Generate Table</button>
+        </div>
+        <div class="output-box" id="ex1-output">Result will appear here...</div>
+    </div>
+
+    <!-- EXERCISE 2: EVEN NUMBERS -->
+    <div class="exercise-card" style="border-left-color: #48bb78;">
+        <div class="exercise-title" style="color: #2f855a;">Exercise 2 – Even Numbers</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="evenLimit">Enter Number</label>
+                <input type="number" id="evenLimit" placeholder="e.g. 20" value="20">
+            </div>
+            <button onclick="findEvenNumbers()" style="background-color: #48bb78;">Show Even</button>
+        </div>
+        <div class="output-box" id="ex2-output">Result will appear here...</div>
+    </div>
+
+    <!-- EXERCISE 3: COUNTDOWN -->
+    <div class="exercise-card" style="border-left-color: #ed8936;">
+        <div class="exercise-title" style="color: #c05621;">Exercise 3 – Countdown</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="countdownStart">Enter Number</label>
+                <input type="number" id="countdownStart" placeholder="e.g. 10" value="10">
+            </div>
+            <button onclick="startCountdown()" style="background-color: #ed8936;">Start Countdown</button>
+        </div>
+        <div class="output-box" id="ex3-output">Result will appear here...</div>
+    </div>
+
+    <!-- EXERCISE 4: SUM OF NUMBERS -->
+    <div class="exercise-card" style="border-left-color: #9f7aea;">
+        <div class="exercise-title" style="color: #6b46c1;">Exercise 4 – Sum of Numbers</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="sumLimit">Enter Number</label>
+                <input type="number" id="sumLimit" placeholder="e.g. 100" value="100">
+            </div>
+            <button onclick="calculateSum()" style="background-color: #9f7aea;">Calculate Sum</button>
+        </div>
+        <div class="output-box" id="ex4-output">Result will appear here...</div>
+    </div>
+
+    <!-- EXERCISE 5: NUMBER PATTERN -->
+    <div class="exercise-card" style="border-left-color: #ecc94b;">
+        <div class="exercise-title" style="color: #b7791f;">Exercise 5 – Number Pattern</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="patternHeight">Enter Number</label>
+                <input type="number" id="patternHeight" placeholder="e.g. 5" value="5">
+            </div>
+            <button onclick="generatePattern()" style="background-color: #ecc94b; color: #1a202c;">Generate Pattern</button>
+        </div>
+        <div class="output-box" id="ex5-output" style="white-space: pre;">Result will appear here...</div>
+    </div>
+</div>
+
+<script>
+    // 1. Exercise 1 – Multiplication Table
+    function generateTable() {
+        const tableNum = parseInt(document.getElementById("tableNum").value);
+        const tableLimit = parseInt(document.getElementById("tableLimit").value);
+        const output = document.getElementById("ex1-output");
+
+        if (isNaN(tableNum) || isNaN(tableLimit)) {
+            output.textContent = "Please fill in valid numbers!";
+            return;
+        }
+
+        let result = "";
+        for (let i = 1; i <= tableLimit; i++) {
+            result += `${tableNum} x ${i} = ${tableNum * i}\n`;
+        }
+        output.textContent = result;
+    }
+
+    // 2. Exercise 2 – Even Numbers
+    function findEvenNumbers() {
+        const limit = parseInt(document.getElementById("evenLimit").value);
+        const output = document.getElementById("ex2-output");
+
+        if (isNaN(limit) || limit < 1) {
+            output.textContent = "Please enter a positive number greater than 1!";
+            return;
+        }
+
+        let evens = [];
+        for (let i = 1; i <= limit; i++) {
+            if (i % 2 === 0) {
+                evens.push(i);
+            }
+        }
+        output.textContent = evens.length > 0 ? evens.join(", ") : "No even numbers found in this range.";
+    }
+
+    // 3. Exercise 3 – Countdown
+    function startCountdown() {
+        const startNum = parseInt(document.getElementById("countdownStart").value);
+        const output = document.getElementById("ex3-output");
+
+        if (isNaN(startNum) || startNum < 1) {
+            output.textContent = "Please enter a starting number of 1 or more!";
+            return;
+        }
+
+        let countdown = [];
+        for (let i = startNum; i >= 1; i--) {
+            countdown.push(i);
+        }
+        output.textContent = countdown.join(", ");
+    }
+
+    // 4. Exercise 4 – Sum of Numbers
+    function calculateSum() {
+        const limit = parseInt(document.getElementById("sumLimit").value);
+        const output = document.getElementById("ex4-output");
+
+        if (isNaN(limit) || limit < 1) {
+            output.textContent = "Please enter a positive integer!";
+            return;
+        }
+
+        let sum = 0;
+        for (let i = 1; i <= limit; i++) {
+            sum += i;
+        }
+        output.textContent = `The sum of numbers from 1 to ${limit} is:\n👉 ${sum}`;
+    }
+
+    // 5. Exercise 5 – Number Pattern (using Nested Loops)
+    function generatePattern() {
+        const height = parseInt(document.getElementById("patternHeight").value);
+        const output = document.getElementById("ex5-output");
+
+        if (isNaN(height) || height < 1) {
+            output.textContent = "Please enter a pattern row count of 1 or more!";
+            return;
+        }
+
+        let pattern = "";
+        // Outer loop controls row count
+        for (let i = 1; i <= height; i++) {
+            let row = "";
+            // Inner loop generates sequence for each row
+            for (let j = 1; j <= i; j++) {
+                row += j;
+            }
+            pattern += row + "\n";
+        }
+        output.textContent = pattern.trim();
+    }
+</script>
+
+</body>
+</html>
