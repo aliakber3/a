@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Array Methods Practice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            margin: 0;
+            padding: 30px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #1a365d;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #ebf8ff;
+            padding-bottom: 15px;
+        }
+        .question-card {
+            background-color: #f7fafc;
+            border-left: 5px solid #4299e1;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 25px;
+            transition: transform 0.2s;
+        }
+        .question-card:hover {
+            transform: translateY(-2px);
+        }
+        .question-title {
+            font-weight: bold;
+            color: #2b6cb0;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .question-desc {
+            color: #4a5568;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        .output-box {
+            background-color: #edf2f7;
+            padding: 12px 18px;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: #1a202c;
+            line-height: 1.5;
+        }
+        .bonus-card {
+            border-left-color: #d69e2e;
+            background-color: #fffaf0;
+        }
+        .bonus-card .question-title {
+            color: #b7791f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Array Methods Practice Questions</h1>
+    <div id="assignment-outputs"></div>
+</div>
+
+<script>
+    const container = document.getElementById("assignment-outputs");
+
+    // Helper function to render each question output beautifully
+    function createCard(title, description, outputHTML, isBonus = false) {
+        const card = document.createElement("div");
+        card.className = `question-card ${isBonus ? 'bonus-card' : ''}`;
+        card.innerHTML = `
+            <div class="question-title">${title}</div>
+            <div class="question-desc">${description}</div>
+            <div class="output-box">${outputHTML}</div>
+        `;
+        container.appendChild(card);
+    }
+
+    // --- QUESTION 1 ---
+    let cities = ["Karachi", "Lahore", "Islamabad", "Peshawar", "Quetta"];
+    cities.push("Faisalabad", "Multan");
+    createCard(
+        "Question 1 (push)",
+        "Create an array of 5 cities. Add 2 new cities at the end using push().",
+        `<strong>Updated Cities Array:</strong> [${cities.join(", ")}]`
+    );
+
+    // --- QUESTION 2 ---
+    let foods = ["Biryani", "Pizza", "Burger", "Kabab", "Karahi", "Tikka"];
+    foods.pop();
+    createCard(
+        "Question 2 (pop)",
+        "Create an array of 6 favorite foods. Remove the last food using pop().",
+        `<strong>Updated Foods Array:</strong> [${foods.join(", ")}]`
+    );
+
+    // --- QUESTION 3 ---
+    let colors = ["Red", "Green", "Blue", "Yellow", "Purple"];
+    colors.shift();
+    let q3Output = "<strong>Remaining colors:</strong><br>";
+    for (let i = 0; i < colors.length; i++) {
+        q3Output += `${i + 1}. ${colors[i]}<br>`;
+    }
+    createCard(
+        "Question 3 (shift & for-loop)",
+        "Create an array of 5 colors. Remove the first color using shift(). Display using a for loop.",
+        q3Output
+    );
+
+    // --- QUESTION 4 ---
+    let languages = ["JavaScript", "Python", "Java", "C++", "Ruby"];
+    languages.unshift("HTML", "CSS");
+    createCard(
+        "Question 4 (unshift)",
+        "Create an array of 5 programming languages. Add 'HTML' and 'CSS' at the beginning using unshift().",
+        `<strong>Updated Languages:</strong> [${languages.join(", ")}]`
+    );
+
+    // --- QUESTION 5 ---
+    let fruits = ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew"];
+    // 3rd fruit is index 2, 6th fruit is index 5. Slice(start, end) is exclusive of end index, so we slice(2, 6)
+    let copiedFruits = fruits.slice(2, 6);
+    createCard(
+        "Question 5 (slice)",
+        "Create an array of 8 fruits. Use slice() to create a new array containing only the 3rd to 6th fruits.",
+        `<strong>Original Fruits Array:</strong> [${fruits.join(", ")}]<br>` +
+        `<strong>Copied Fruits (3rd to 6th):</strong> [${copiedFruits.join(", ")}]`
+    );
+
+    // --- QUESTION 6 ---
+    let animals = ["Cat", "Dog", "Elephant", "Giraffe", "Zebra", "Monkey", "Kangaroo"];
+    // Insert after second element (index 2) without deleting
+    animals.splice(2, 0, "Lion", "Tiger");
+    createCard(
+        "Question 6 (splice to insert)",
+        "Create an array of 7 animals. Use splice() to insert 'Lion' and 'Tiger' after the second element without deleting.",
+        `<strong>Updated Animals Array:</strong> [${animals.join(", ")}]`
+    );
+
+    // --- QUESTION 7 ---
+    let cars = ["Toyota", "Honda", "Ford", "BMW", "Audi", "Tesla"];
+    // Remove 3rd (index 2) and 4th (index 3) brands -> delete 2 items starting from index 2
+    cars.splice(2, 2);
+    createCard(
+        "Question 7 (splice to remove)",
+        "Create an array of 6 car brands. Use splice() to remove the 3rd and 4th brands.",
+        `<strong>Updated Car Brands Array:</strong> [${cars.join(", ")}]`
+    );
+
+    // --- QUESTION 8 ---
+    let subjects = ["Math", "Physics", "English", "Chemistry", "Biology", "History"];
+    // Replace 2nd subject (index 1) with "Computer Science"
+    subjects.splice(1, 1, "Computer Science");
+    createCard(
+        "Question 8 (splice to replace)",
+        "Create an array of 6 subjects. Replace the 2nd subject with 'Computer Science' using splice().",
+        `<strong>Updated Subjects Array:</strong> [${subjects.join(", ")}]`
+    );
+
+    // --- QUESTION 9 ---
+    let students = ["Ali", "Sara", "Zain", "Sana", "Hamza", "Hania", "Bilal", "Yousuf", "Ayesha", "Mustafa"];
+    
+    students.push("Kamran", "Mariam"); // 1. Add 2 new students at end
+    students.shift();                  // 2. Remove first student
+    students.unshift("Ahmed");         // 3. Add "Ahmed" at beginning
+    students.pop();                    // 4. Remove last student
+
+    let q9Output = "<strong>Final Students Array (using loop):</strong><br>";
+    for (let i = 0; i < students.length; i++) {
+        q9Output += `${i + 1}. ${students[i]}<br>`;
+    }
+    createCard(
+        "Question 9 (Multiple Operations)",
+        "Perform operations (push, shift, unshift, pop) on an array of 10 students and print using a loop.",
+        q9Output
+    );
+
+    // --- QUESTION 10 ---
+    let mobiles = ["Samsung", "Nokia", "Xiaomi", "Realme", "Infinix", "Vivo", "Oppo", "Tecno"];
+    
+    mobiles.push("OnePlus");        // 1. Add "OnePlus" at end
+    mobiles.shift();                // 2. Remove first brand
+    mobiles.unshift("Apple");       // 3. Add "Apple" at beginning
+    
+    // 4. Copy last 4 brands using slice()
+    let lastFourMobiles = mobiles.slice(-4); 
+    
+    // 5. Insert "Nothing" after the 3rd element (which is index 3) using splice()
+    mobiles.splice(3, 0, "Nothing");
+
+    // 6. Display both arrays using a loop
+    let q10Output = "<strong>Main Mobiles Array:</strong><br>";
+    for(let i=0; i < mobiles.length; i++) {
+        q10Output += `- ${mobiles[i]}<br>`;
+    }
+    q10Output += "<br><strong>Copied Last 4 Mobiles Array:</strong><br>";
+    for(let i=0; i < lastFourMobiles.length; i++) {
+        q10Output += `- ${lastFourMobiles[i]}<br>`;
+    }
+
+    createCard(
+        "Question 10 (Complex Chain)",
+        "Perform multiple structured operations on an array of 8 mobile brands.",
+        q10Output
+    );
+
+    // --- BONUS CHALLENGE ---
+    let numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    
+    numbers.push(100, 200);   // 1. Add 100 and 200
+    numbers.shift();          // 2. Remove first number
+    numbers.unshift(0);       // 3. Add 0 at beginning
+    
+    // 4. Copy middle 5 numbers. 
+    // Current length is 11 [0, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200]
+    // The middle 5 are index 3 through 7 (40, 50, 60, 70, 80) -> slice(3, 8)
+    let middleNumbers = numbers.slice(3, 8);
+
+    // 5. Replace 4th number (index 3) with 999 using splice()
+    numbers.splice(3, 1, 999);
+
+    // 6. Loop output
+    let bonusOutput = "<strong>Final Numbers Array:</strong><br>";
+    for(let i=0; i < numbers.length; i++) {
+        bonusOutput += `${numbers[i]} `;
+    }
+    bonusOutput += "<br><br><strong>Copied Middle Array:</strong><br>";
+    for(let i=0; i < middleNumbers.length; i++) {
+        bonusOutput += `${middleNumbers[i]} `;
+    }
+
+    createCard(
+        "⭐ Bonus Challenge",
+        "Perform operations on a numeric array, target middle values, replace via splice, and loop outputs.",
+        bonusOutput,
+        true
+    );
+</script>
+
+</body>
+</html>
