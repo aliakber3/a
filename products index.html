@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake Store Products</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+h1{
+    text-align:center;
+    padding:20px;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 4px 8px rgba(0,0,0,.2);
+    padding:15px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:150px;
+    height:180px;
+    object-fit:contain;
+}
+
+.card h3{
+    font-size:18px;
+    height:50px;
+    overflow:hidden;
+}
+
+.price{
+    color:#27ae60;
+    font-size:22px;
+    font-weight:bold;
+}
+
+button{
+    background:#007bff;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Fake Store Products</h1>
+
+<div class="products" id="products"></div>
+
+<script>
+fetch("https://fakestoreapi.com/products")
+.then(res => res.json())
+.then(data => {
+    let output = "";
+
+    data.forEach(product => {
+        output += `
+        <div class="card">
+            <img src="${product.image}" alt="">
+            <h3>${product.title}</h3>
+            <p class="price">$${product.price}</p>
+            <p>${product.category}</p>
+            <button>Add to Cart</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("products").innerHTML = output;
+});
+</script>
+
+</body>
+</html>
