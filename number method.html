@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game - 12 Sided & 3 Teams</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .team-card {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            width: 30%;
+            min-width: 180px;
+            margin: 5px;
+            background-color: #fafafa;
+        }
+
+        .team-card.active {
+            border-color: #28a745;
+            background-color: #eafaf1;
+        }
+
+        .dice-box {
+            font-size: 3rem;
+            margin: 20px 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #aaa;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        #announcement {
+            height: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d9534f;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>12-Sided Dice Game</h1>
+    
+    <div class="scoreboard">
+        <div class="team-card active" id="card-0">
+            <h3>Team A</h3>
+            <p>Score: <span id="score-0">0</span></p>
+            <p>Avg Roll: <span id="avg-0">0.00</span></p>
+            <p>Best: <span id="best-0">-</span> | Worst: <span id="worst-0">-</span></p>
+        </div>
+
+        <div class="team-card" id="card-1">
+            <h3>Team B</h3>
+            <p>Score: <span id="score-1">0</span></p>
+            <p>Avg Roll: <span id="avg-1">0.00</span></p>
+            <p>Best: <span id="best-1">-</span> | Worst: <span id="worst-1">-</span></p>
+        </div>
+
+        <div class="team-card" id="card-2">
+            <h3>Team C</h3>
+            <p>Score: <span id="score-2">0</span></p>
+            <p>Avg Roll: <span id="avg-2">0.00</span></p>
+            <p>Best: <span id="best-2">-</span> | Worst: <span id="worst-2">-</span></p>
+        </div>
+    </div>
+
+    <div id="announcement">Turn: Team A</div>
+
+    <div class="dice-box" id="dice-display">🎲</div>
+
+    <button id="roll-btn" onclick="takeTurn()">Roll Dice</button>
+    <button onclick="resetGame()">Reset Game</button>
+</div>
+
+<script>
+    // Part 3: Using Array of Objects for Team Data
+    let teams = [
+        { name: "Team A", score: 0, turns: 0, highest: 0, lowest: Infinity, totalRollSum: 0 },
+        { name: "Team B", score: 0, turns: 0, highest: 0, lowest: Infinity, totalRollSum: 0 },
+        { name: "Team C", score: 0, turns: 0, highest: 0, lowest: Infinity, totalRollSum: 0 }
+    ];
+
+    let currentTeamIndex = 0;
+    let gameOver = false;
+
+    // Part 2 (Item 1): 12-sided dice range generator
+    function generateNumber() {
+        return Math.floor(Math.random() * 12) + 1;
+    }
+
+    function takeTurn() {
+        if (gameOver) return;
+
+        let currentTeam = teams[currentTeamIndex];
+        let roll = generateNumber();
+        
+        // Display roll result
+        document.getElementById("dice-display").innerText = `Rolled: ${roll}`;
+
+        // Track stats (best/worst & roll sum for average)
+        currentTeam.turns += 1;
+        currentTeam.totalRollSum += roll;
+        
+        // Part 2 (Item 3): Track Best and Worst single roll
+        if (roll > currentTeam.highest) currentTeam.highest = roll;
+        if (roll < currentTeam.lowest) currentTeam.lowest = roll;
+
+        // Part 2 (Item 5): Double or Nothing rule on rolling a 6
+        let pointsToAdd = roll;
+        let announcementText = "";
+
+        if (roll === 6) {
+            pointsToAdd = roll * 2; // Add double points
+            announcementText = `🔥 DOUBLE POINTS! ${currentTeam.name} rolled a 6 and scored ${pointsToAdd} pts!`;
+        } else {
+            announcementText = `${currentTeam.name} scored ${pointsToAdd} pts.`;
+        }
+
+        currentTeam.score += pointsToAdd;
+
+        // Update UI for the current team
+        updateTeamUI(currentTeamIndex);
+
+        // Part 2 (Item 4): Win Condition (First to 50 points wins immediately)
+        if (currentTeam.score >= 50) {
+            document.getElementById("announcement").innerText = `🏆 ${currentTeam.name} WINS THE GAME WITH ${currentTeam.score} POINTS! 🏆`;
+            document.getElementById("announcement").style.color = "green";
+            document.getElementById("roll-btn").disabled = true;
+            gameOver = true;
+            return;
+        }
+
+        // Advance to next team turn
+        currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+        
+        // Update turn indicator UI
+        document.getElementById("announcement").innerText = announcementText + ` | Next turn: ${teams[currentTeamIndex].name}`;
+        document.getElementById("announcement").style.color = (roll === 6) ? "#d9534f" : "#333";
+        highlightActiveCard();
+    }
+
+    function updateTeamUI(index) {
+        let team = teams[index];
+        
+        // Part 2 (Item 2): Running average rounded to 2 decimal places using toFixed(2)
+        let average = (team.totalRollSum / team.turns).toFixed(2);
+
+        document.getElementById(`score-${index}`).innerText = team.score;
+        document.getElementById(`avg-${index}`).innerText = average;
+        document.getElementById(`best-${index}`).innerText = team.highest;
+        document.getElementById(`worst-${index}`).innerText = team.lowest === Infinity ? "-" : team.lowest;
+    }
+
+    function highlightActiveCard() {
+        for (let i = 0; i < teams.length; i++) {
+            let card = document.getElementById(`card-${i}`);
+            if (i === currentTeamIndex) {
+                card.classList.add("active");
+            } else {
+                card.classList.remove("active");
+            }
+        }
+    }
+
+    function resetGame() {
+        teams = [
+            { name: "Team A", score: 0, turns: 0, highest: 0, lowest: Infinity, totalRollSum: 0 },
+            { name: "Team B", score: 0, turns: 0, highest: 0, lowest: Infinity, totalRollSum: 0 },
+            { name: "Team C", score: 0, turns: 0, highest: 0, lowest: Infinity, totalRollSum: 0 }
+        ];
+        currentTeamIndex = 0;
+        gameOver = false;
+
+        document.getElementById("roll-btn").disabled = false;
+        document.getElementById("dice-display").innerText = "🎲";
+        document.getElementById("announcement").innerText = "Turn: Team A";
+        document.getElementById("announcement").style.color = "#333";
+
+        for (let i = 0; i < teams.length; i++) {
+            document.getElementById(`score-${i}`).innerText = "0";
+            document.getElementById(`avg-${i}`).innerText = "0.00";
+            document.getElementById(`best-${i}`).innerText = "-";
+            document.getElementById(`worst-${i}`).innerText = "-";
+        }
+
+        highlightActiveCard();
+    }
+</script>
+
+</body>
+</html>
